@@ -21,9 +21,31 @@ def MED(S, T):
 
 def fast_MED(S, T, MED={}):
     # TODO -  implement top-down memoization
-    pass
+    if (S, T) in MED:
+        return MED[(S, T)]
+    if (S == ""):
+        return len(T)
+    elif (T == ""):
+        return len(S)
+    else:
+        if (S[0] == T[0]):
+            return fast_MED(S[1:], T[1:], MED)
+        else:
+            MED[(S, T)] = 1 + min(fast_MED(S, T[1:], MED), fast_MED(S[1:], T, MED))
+            return MED[(S, T)]
 
 def fast_align_MED(S, T, MED={}):
     # TODO - keep track of alignment
-    pass
+    if (S, T) in MED:
+        return MED[(S, T)]
+    if (S == ""):
+        return len(T)
+    elif (T == ""):
+        return len(S)
+    else:
+        if (S[0] == T[0]):
+            return fast_MED(S[1:], T[1:], MED)
+        else:
+            MED[(S, T)] = 1 + min(fast_MED(S, T[1:], MED), fast_MED(S[1:], T, MED))
+            return MED[(S, T)]
 
